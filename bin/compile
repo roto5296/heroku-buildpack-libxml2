@@ -30,12 +30,14 @@ echo "-----> Writing profile script"
 mkdir -p $BUILD_DIR/.profile.d
 cat <<EOF >$BUILD_DIR/.profile.d/000_libxml2.sh
 export PATH="\$HOME/vendor/libxml2/bin:$PATH"
+export LIBRARY_PATH="\$HOME/vendor/libxml2/lib:\$LIBRARY_PATH"
 export LD_LIBRARY_PATH="\$HOME/vendor/libxml2/lib:\$LD_LIBRARY_PATH"
 export INCLUDE_PATH="\$HOME/vendor/libxml2/include:\$INCLUDE_PATH"
 export PKG_CONFIG_PATH="\$HOME/vendor/libxml2/lib/pkgconfig/:\$PKG_CONFIG_PATH"
 EOF
 
 export PATH="$HOME/vendor/libxml2/bin:$PATH"
+export LIBRARY_PATH="$HOME/vendor/libxml2/lib:$LIBRARY_PATH"
 export LD_LIBRARY_PATH="$HOME/vendor/libxml2/lib:$LD_LIBRARY_PATH"
 export INCLUDE_PATH="$HOME/vendor/libxml2/include:$INCLUDE_PATH"
 export PKG_CONFIG_PATH="$HOME/vendor/libxml2/lib/pkgconfig/:$PKG_CONFIG_PATH"
