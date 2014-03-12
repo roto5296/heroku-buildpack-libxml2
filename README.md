@@ -23,10 +23,8 @@ $ git push heroku master
 Note
 -----
 
-If you're using [heroku-buildpack-multi](https://github.com/ddollar/heroku-buildpack-multi) to include other buildpacks, you should set environment variable by your own to include following paths.
-
-    PATH="/usr/local/bin:/usr/bin:/bin:/app/vendor/libxml2/bin"
-    LD_LIBRARY_PATH="/usr/local/lib:/usr/lib:/lib:/app/vendor/libxml2/lib"
-
+Use my fork of
+[heroku-buildpack-multi](https://github.com/mcolyer/heroku-buildpack-multi)
+to allow for proper export of variables to subsequent buildpacks.
 
 [1]: https://github.com/sparklemotion/nokogiri/issues/458
