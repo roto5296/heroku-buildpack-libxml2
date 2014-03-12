@@ -16,10 +16,10 @@ FILE_NAME=${ARCHIVE_NAME}.tar.bz2
 BUILDPACK_LIBXML2_PACKAGE=https://github.com/mcolyer/heroku-buildpack-libxml2/releases/download/${TAG_NAME}/${FILE_NAME}
 
 mkdir -p $CACHE_DIR
-if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
+#if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
   echo "-----> Fetching libxml2 ${VERSION} binaries at ${BUILDPACK_LIBXML2_PACKAGE}"
   curl $BUILDPACK_LIBXML2_PACKAGE -L -s -o $CACHE_DIR/$FILE_NAME
-fi
+#fi
 
 echo "-----> Extracting libxml2 ${VERSION} binaries to ${BUILD_DIR}/vendor/libxml2"
 mkdir -p $CACHE_DIR/$ARCHIVE_NAME
