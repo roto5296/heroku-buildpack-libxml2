@@ -1,4 +1,4 @@
 #!/bin/sh
 
-echo "PhantomJS"
+echo "libxml2"
 exit 0
