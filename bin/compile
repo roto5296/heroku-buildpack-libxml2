@@ -9,7 +9,8 @@ CACHE_DIR=$2
 VERSION="2.7.7"
 
 # Buildpack URL
-TAG_NAME=libxml2-${VERSION}
+LIB_NAME=libxml2
+TAG_NAME=${LIB_NAME}-${VERSION}
 ARCHIVE_NAME=${TAG_NAME}-x86_64
 FILE_NAME=${ARCHIVE_NAME}.tar.bz2
 BUILDPACK_LIBXML2_PACKAGE=https://github.com/mcolyer/heroku-buildpack-libxml2/releases/download/${TAG_NAME}/${FILE_NAME}
@@ -24,7 +25,7 @@ echo "-----> Extracting libxml2 ${VERSION} binaries to ${BUILD_DIR}/vendor/libxm
 mkdir -p $CACHE_DIR/$ARCHIVE_NAME
 mkdir -p $BUILD_DIR/vendor
 tar jxf $CACHE_DIR/$FILE_NAME -C $CACHE_DIR
-mv $CACHE_DIR/$ARCHIVE_NAME $BUILD_DIR/vendor/libxml2
+mv $CACHE_DIR/${LIB_NAME} $BUILD_DIR/vendor/${LIB_NAME}
 
 echo "-----> Writing profile script"
 mkdir -p $BUILD_DIR/.profile.d
