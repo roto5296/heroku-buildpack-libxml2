@@ -9,9 +9,10 @@ CACHE_DIR=$2
 VERSION="2.7.7"
 
 # Buildpack URL
-ARCHIVE_NAME=libxml2-${VERSION}-x64
+TAG_NAME=libxml2-${VERSION}
+ARCHIVE_NAME=${TAG_NAME}-x64
 FILE_NAME=${ARCHIVE_NAME}.tar.bz2
-BUILDPACK_LIBXML2_PACKAGE=https://github.com/mcolyer/heroku-buildpack-libxml2/downloads/${FILE_NAME}
+BUILDPACK_LIBXML2_PACKAGE=https://github.com/mcolyer/heroku-buildpack-libxml2/releases/download/${TAG_NAME}/${FILE_NAME}
 
 mkdir -p $CACHE_DIR
 if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
