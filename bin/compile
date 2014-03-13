@@ -28,14 +28,15 @@ tar jxf $CACHE_DIR/$FILE_NAME -C $CACHE_DIR
 mv $CACHE_DIR/${LIB_NAME} $BUILD_DIR/vendor/${LIB_NAME}
 
 # Copy to an ephemeral location for other buildpacks
-#mkdir -p $HOME/vendor/libxml2/
-#cp -r $BUILD_DIR/vendor/${LIB_NAME} $HOME/vendor/
-#ls -al /app/vendor/libxml2/
+mkdir -p $HOME/vendor/libxml2/
+cp -r $BUILD_DIR/vendor/${LIB_NAME} $HOME/vendor/
+ls -al /app/vendor/libxml2/
 
 # From https://gist.github.com/perplexes/5357663
-rm -rf $CACHE_DIR/.bundle
-cp -v -R $BUILD_DIR/.heroku_bundle $BUILD_DIR/.bundle
-sed -i "s,/app,$BUILD_DIR,g" $BUILD_DIR/.bundle/config
+if [ -d $BUILD_DIR/.heroku_bundle ]; then
+  rm -rf $CACHE_DIR/.bundle
+  cp -R $BUILD_DIR/.heroku_bundle $BUILD_DIR/.bundle
+fi
 
 echo "-----> Writing profile script"
 mkdir -p $BUILD_DIR/.profile.d
