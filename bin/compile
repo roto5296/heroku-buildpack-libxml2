@@ -27,9 +27,9 @@ mkdir -p $BUILD_DIR/vendor
 tar jxf $CACHE_DIR/$FILE_NAME -C $CACHE_DIR
 mv $CACHE_DIR/${LIB_NAME} $BUILD_DIR/vendor/${LIB_NAME}
 
-mkdir -p /usr/local
-ln -s $BUILD_DIR/vendor/${LIB_NAME}/lib/libxml2.so.2 $BUILD_DIR/vendor/ruby-2.1.0/lib/libxml2.so.2
-ls -al $BUILD_DIR/vendor/ruby-2.1.0/lib
+#mkdir -p /usr/local
+#ln -s $BUILD_DIR/vendor/${LIB_NAME}/lib/libxml2.so.2 $BUILD_DIR/vendor/ruby-2.1.0/lib/libxml2.so.2
+#ls -al $BUILD_DIR/vendor/ruby-2.1.0/lib
 
 echo "-----> Writing profile script"
 mkdir -p $BUILD_DIR/.profile.d
