@@ -27,24 +27,26 @@ mkdir -p $BUILD_DIR/vendor
 tar jxf $CACHE_DIR/$FILE_NAME -C $CACHE_DIR
 mv $CACHE_DIR/${LIB_NAME} $BUILD_DIR/vendor/${LIB_NAME}
 
-# Copy to an ephemeral location for other buildpacks
+# Attempt to sneak a copy of libxml into a path thats required by
+# nokogiri's build process before the system library.
+#
+# Unfortunately this doesn't work and I don't understand why.
 mkdir -p $BUILD_DIR/vendor/ruby-2.1.0/lib/
 cp -r $BUILD_DIR/vendor/${LIB_NAME}/lib/* $BUILD_DIR/vendor/ruby-2.1.0/lib/
 ls -al $BUILD_DIR/vendor/ruby-2.1.0/lib/
 
-# From https://gist.github.com/perplexes/5357663
-#if [ -d $BUILD_DIR/.heroku_bundle ]; then
-#  rm -rf $CACHE_DIR/.bundle
-#  cp -R $BUILD_DIR/.heroku_bundle $BUILD_DIR/.bundle
-#fi
+# Enable the use of bundler configuration for building gems.
+#
+# Taken from https://gist.github.com/perplexes/5357663
+if [ -d $BUILD_DIR/.heroku_bundle ]; then
+  rm -rf $CACHE_DIR/.bundle
+  cp -R $BUILD_DIR/.heroku_bundle $BUILD_DIR/.bundle
+fi
 
 echo "-----> Writing profile script"
 mkdir -p $BUILD_DIR/.profile.d
 cat <<EOF >$BUILD_DIR/.profile.d/000_libxml2.sh
 export PATH="\$HOME/vendor/libxml2/bin:$PATH"
-export LIBRARY_PATH="\$HOME/vendor/libxml2/lib:\$LIBRARY_PATH"
 export LD_LIBRARY_PATH="\$HOME/vendor/libxml2/lib:\$LD_LIBRARY_PATH"
-export INCLUDE_PATH="\$HOME/vendor/libxml2/include:\$INCLUDE_PATH"
-export PKG_CONFIG_PATH="\$HOME/vendor/libxml2/lib/pkgconfig/:\$PKG_CONFIG_PATH"
 export LD_PRELOAD="\$HOME/vendor/libxml2/lib/libxml2.so:\$LD_PRELOAD"
 EOF

@@ -1,14 +1,22 @@
 #!/bin/sh
+#
+# These variables are only available to subsequent buildpacks if you use
+#
+# https://github.com/mcolyer/heroku-buildpack-multi
+#
+# Also important to note that these variables are only available on the
+# build system which has a different FS layout that normal dynos.
 
 set -e
 
 BUILD_DIR=$1
 
-export PATH="$BUILD_DIR/vendor/libxml2/bin:$PATH"
-export LIBRARY_PATH="$BUILD_DIR/vendor/libxml2/lib:$LIBRARY_PATH"
-export LD_LIBRARY_PATH="$BUILD_DIR/vendor/libxml2/lib:$LD_LIBRARY_PATH"
-export INCLUDE_PATH="$BUILD_DIR/vendor/libxml2/include:$INCLUDE_PATH"
-
+# So this actual does work with nokogiri, but because the system paths
+# are set explictly earlier it has no effect. Also the paths returned by
+# pkg-config are dependent on build settings
 #export PKG_CONFIG_PATH="$BUILD_DIR/vendor/libxml2/lib/pkgconfig/:$PKG_CONFIG_PATH"
+
+# So these variables also influence nokogiri but again they come too
+# late in the process to be effective
 #export CFLAGS="$HOME/vendor/libxml2/include/"
 #export LIBS="-l$HOME/vendor/libxml2/lib/libxml2.so.2"
