@@ -27,9 +27,9 @@ mkdir -p $BUILD_DIR/vendor
 tar jxf $CACHE_DIR/$FILE_NAME -C $CACHE_DIR
 mv $CACHE_DIR/${LIB_NAME} $BUILD_DIR/vendor/${LIB_NAME}
 
-ln -s $BUILD_DIR/vendor/${LIB_NAME} $HOME/vendor/${LIB_NAME}
-ls -al $HOME/vendor/${LIB_NAME}/lib
-ls -al /app/vendor/libxml2/lib
+mkdir -p /opt/local
+ln -s $BUILD_DIR/vendor/${LIB_NAME}/lib /opt/local/lib
+ls -al /opt/local/lib
 
 echo "-----> Writing profile script"
 mkdir -p $BUILD_DIR/.profile.d
