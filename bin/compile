@@ -33,7 +33,7 @@ mv $CACHE_DIR/${LIB_NAME} $BUILD_DIR/vendor/${LIB_NAME}
 #ls -al /app/vendor/libxml2/
 
 # From https://gist.github.com/perplexes/5357663
-rm -f $CACHE_DIR/.bundle
+rm -rf $CACHE_DIR/.bundle
 cp -v -R $BUILD_DIR/.heroku_bundle $BUILD_DIR/.bundle
 sed -i "s,/app,$BUILD_DIR,g" $BUILD_DIR/.bundle/config
 
