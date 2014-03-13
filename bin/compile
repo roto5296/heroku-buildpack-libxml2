@@ -29,14 +29,14 @@ mv $CACHE_DIR/${LIB_NAME} $BUILD_DIR/vendor/${LIB_NAME}
 
 # Copy to an ephemeral location for other buildpacks
 mkdir -p $BUILD_DIR/vendor/ruby-2.1.0/lib/
-cp $BUILD_DIR/vendor/${LIB_NAME}/lib/* $BUILD_DIR/vendor/ruby-2.1.0/lib/
+cp -r $BUILD_DIR/vendor/${LIB_NAME}/lib/* $BUILD_DIR/vendor/ruby-2.1.0/lib/
 ls -al /app/vendor/libxml2/
 
 # From https://gist.github.com/perplexes/5357663
-if [ -d $BUILD_DIR/.heroku_bundle ]; then
-  rm -rf $CACHE_DIR/.bundle
-  cp -R $BUILD_DIR/.heroku_bundle $BUILD_DIR/.bundle
-fi
+#if [ -d $BUILD_DIR/.heroku_bundle ]; then
+#  rm -rf $CACHE_DIR/.bundle
+#  cp -R $BUILD_DIR/.heroku_bundle $BUILD_DIR/.bundle
+#fi
 
 echo "-----> Writing profile script"
 mkdir -p $BUILD_DIR/.profile.d
