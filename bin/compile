@@ -27,8 +27,11 @@ mkdir -p $BUILD_DIR/vendor
 tar jxf $CACHE_DIR/$FILE_NAME -C $CACHE_DIR
 mv $CACHE_DIR/${LIB_NAME} $BUILD_DIR/vendor/${LIB_NAME}
 
+ls -al $HOME
+mkdir -p $HOME/vendor
+ln -s $BUILD_DIR/vendor/${LIB_NAME} $HOME/vendor/${LIB_NAME}
+
 echo "-----> Writing profile script"
-export
 mkdir -p $BUILD_DIR/.profile.d
 cat <<EOF >$BUILD_DIR/.profile.d/000_libxml2.sh
 export PATH="\$HOME/vendor/libxml2/bin:$PATH"
