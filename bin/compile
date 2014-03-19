@@ -33,6 +33,7 @@ mv $CACHE_DIR/${LIB_NAME} $BUILD_DIR/vendor/${LIB_NAME}
 # Unfortunately this doesn't work and I don't understand why.
 mkdir -p $BUILD_DIR/vendor/ruby-2.1.0/lib/
 cp -r $BUILD_DIR/vendor/${LIB_NAME}/lib/* $BUILD_DIR/vendor/ruby-2.1.0/lib/
+echo $BUILD_DIR/vendor/ruby-2.1.0/lib/
 ls -al $BUILD_DIR/vendor/ruby-2.1.0/lib/
 
 # Enable the use of bundler configuration for building gems.
