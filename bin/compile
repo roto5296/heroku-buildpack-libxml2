@@ -4,6 +4,7 @@ set -e
 
 BUILD_DIR=$1
 CACHE_DIR=$2
+BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 
 # config
 VERSION="2.7.7"
@@ -27,23 +28,8 @@ mkdir -p $BUILD_DIR/vendor
 tar jxf $CACHE_DIR/$FILE_NAME -C $CACHE_DIR
 mv $CACHE_DIR/${LIB_NAME} $BUILD_DIR/vendor/${LIB_NAME}
 
-# Attempt to sneak a copy of libxml into a path thats required by
-# nokogiri's build process before the system library.
-#
-# Unfortunately this doesn't work and I don't understand why.
-mkdir -p $BUILD_DIR/vendor/ruby-2.1.0/lib/
-cp -r $BUILD_DIR/vendor/${LIB_NAME}/lib/* $BUILD_DIR/vendor/ruby-2.1.0/lib/
-ls -al $BUILD_DIR/vendor/ruby-2.1.0/lib/
-
-# Enable the use of bundler configuration for building gems.
-#
-# Taken from https://gist.github.com/perplexes/5357663
-if [ -d $BUILD_DIR/.heroku_bundle ]; then
-  rm -rf $CACHE_DIR/.bundle
-  cp -R $BUILD_DIR/.heroku_bundle $BUILD_DIR/.bundle
-fi
-
 echo "-----> Writing profile script"
+echo "export PATH=\"$BUILD_DIR/vendor/libxml2/bin:\$PATH\"" > $BP_DIR/export
 mkdir -p $BUILD_DIR/.profile.d
 cat <<EOF >$BUILD_DIR/.profile.d/000_libxml2.sh
 export PATH="\$HOME/vendor/libxml2/bin:$PATH"
